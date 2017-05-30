@@ -1,6 +1,6 @@
 class Item
 
-  def initialize(args)
+  def initialize
     @id            = id #id returns the integer id of the item
     @name          = name #returns the name of the item
     @unit_price    = unit_price #returns the price of the item formatted as a BigDecimal
