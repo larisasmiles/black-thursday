@@ -1,19 +1,30 @@
+require 'csv'
+require './lib/item'
+require "pry"
 class SalesEngine
 
-  def initialize
-    @items  => "./data/items.csv",
-    @merchants => "./data/merchants.csv",
-  })
-  end
-# Then let’s tie everything together with one common root, a SalesEngine instance:
-#
-# se = SalesEngine.from_csv({
-#   :items     => "./data/items.csv",
-#   :merchants => "./data/merchants.csv",
-# })
-# From there we can find the child instances:
-#
-# items returns an instance of ItemRepository with all the item instances loaded
-# merchants returns an instance of MerchantRepository with all the merchant instances loaded
 
+  def initialize(data) # called an instance method
+  #   @items  => "./data/items.csv"
+  #   @merchants => "./data/merchants.csv"
+  # @items = 2   (need attr_reader)
+  # @merchants = merchant_repo
+  end
+
+  def self.from_csv(csvs) #called a Class Method
+    # create an instance of Sales Engine
+    #  * self.new(csvs)
+    #  * initialize(csvs)
+    # pass instance csv file paths
+    # its goes and does something
+    # return that instance of Sales Engine
+  end
+
+  def load_csv(path)
+    results = CSV.open(path, headers:true, header_converters: :symbol)
+    results.each do |row|
+      Item.new(row)
+      p "just created #{row}[:id]"
+    end
+  end
 end
