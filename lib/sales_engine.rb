@@ -2,9 +2,13 @@ require 'csv'
 require './lib/item'
 require "pry"
 class SalesEngine
+  attr_reader :merchants
+
+  def initialize(data)
+    @merchants = MerchantRepository.new(data[:merchants])
 
 
-  def initialize(data) # called an instance method
+    # called an instance method
   #   @items  => "./data/items.csv"
   #   @merchants => "./data/merchants.csv"
   # @items = 2   (need attr_reader)
@@ -13,7 +17,7 @@ class SalesEngine
 
   def self.from_csv(csvs) #called a Class Method
     # create an instance of Sales Engine
-    #  * self.new(csvs)
+     self.new(csvs)
     #  * initialize(csvs)
     # pass instance csv file paths
     # its goes and does something
