@@ -13,7 +13,7 @@ class Item
   end
 
   def unit_price_to_dollars
-    @unit_price
+    @unit_price / 100
   end
 
 #   We create an instance like this:
