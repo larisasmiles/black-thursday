@@ -2,12 +2,10 @@ require 'csv'
 require "pry"
 require './lib/merchant'
 class MerchantRepository
-    attr_reader :path, :all
+    attr_reader :all
 
   def initialize(path)
     @all  = load_csv(path)
-
-    # @all ||=path.map { |row| Merchant.new(row, self) }
   end
 
   def load_csv(path)

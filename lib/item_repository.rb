@@ -1,42 +1,46 @@
+require 'csv'
+require './lib/item'
+
 class ItemRepository
+    attr_reader :all
 
-# It's initialized and used like this:
-#   se = SalesEngine.from_csv({
-#   :items     => "./data/items.csv",
-#   :merchants => "./data/merchants.csv"
-# })
-#
-# ir   = se.items
-# item = ir.find_by_name("Item Repellat Dolorum")
-# # => <Item>
+    def initialize(path)
+      @all = load_csv(path)
+    end
 
+    def load_csv(path)
+      results = CSV.open(path, headers:true, header_converters: :symbol)
+      results.map do |row|
+        Item.new(row)
+      end
+    end
 
-def all
-  # returns an array of all known Item instances
-end
+    def find_by_id(id)
+      @all.select do |item|
+        item.id == id
+      end.first
+    end
 
-def find_by_id
-  # returns either nil or an instance of Item with a matching ID
-end
+    def find_by_name(item)
+      @all.find do |name|
+        name.name == item
+      end
+    end
 
-def find_by_name
-  # returns either nil or an instance of Item having done a case insensitive search
-end
+    def find_all_with_decription
+      # returns either [] or instances of Item where the supplied string appears in the item description (case insensitive)
+    end
 
-def find_all_with_decription
-  # returns either [] or instances of Item where the supplied string appears in the item description (case insensitive)
-end
+    def find_all_by_price
+      # returns either [] or instances of Item where the supplied price exactly matches
+    end
 
-def find_all_by_price
-  # returns either [] or instances of Item where the supplied price exactly matches
-end
+    def find_all_by_price_in_range
+      #  returns either [] or instances of Item where the supplied price is in the supplied range (a single Ruby range instance is passed in)
+    end
 
-def find_all_by_price_in_range
-  #  returns either [] or instances of Item where the supplied price is in the supplied range (a single Ruby range instance is passed in)
-end
-
-def find_all_by_merchant_id
-  # returns either [] or instances of Item where the supplied merchant ID matches that supplied
-end
+    def find_all_by_merchant_id
+      # returns either [] or instances of Item where the supplied merchant ID matches that supplied
+    end
 
 end
