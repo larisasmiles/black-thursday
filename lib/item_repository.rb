@@ -1,6 +1,7 @@
 require 'csv'
 require './lib/item'
 
+
 class ItemRepository
     attr_reader :all
 
@@ -27,17 +28,25 @@ class ItemRepository
       end
     end
 
-    def find_all_with_decription
-      # returns either [] or instances of Item where the supplied string appears in the item description (case insensitive)
+    def find_all_with_decription(description)
+      @all.select do |description|
+        description.description == description
+      end
     end
 
-    def find_all_by_price
-      # returns either [] or instances of Item where the supplied price exactly matches
+    def find_all_by_price(unit_price)
+      @all.select do |item|
+        item.unit_price_to_dollars == unit_price
+      end
     end
 
-    def find_all_by_price_in_range
-      #  returns either [] or instances of Item where the supplied price is in the supplied range (a single Ruby range instance is passed in)
-    end
+    # def find_all_by_price_in_range(range)
+    #   @all.find_all do |item|
+    #     (range).include?(item.unit_price)
+    #     binding.pry
+    #   end
+    # end
+
 
     def find_all_by_merchant_id
       # returns either [] or instances of Item where the supplied merchant ID matches that supplied

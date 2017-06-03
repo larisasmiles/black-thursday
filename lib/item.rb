@@ -1,5 +1,4 @@
 
-require "pry"
 class Item
   attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at
 
@@ -13,7 +12,7 @@ class Item
   end
 
   def unit_price_to_dollars
-    @unit_price / 100
+    @unit_price.to_f / 100
   end
 
 #   We create an instance like this:
