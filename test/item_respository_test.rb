@@ -40,13 +40,19 @@ class ItemRepositoryTest < Minitest::Test
 
   end
 
-  # def test_if_can_find_a_price_range
-  #   ir = ItemRepository.new('./test/fixtures/items_fixture.csv')
-  #
-  #   result = ir.find_all_by_price_in_range(13..13.50).count
-  #   assert_equal
-  # end
+  def test_if_can_find_a_price_range
+    ir = ItemRepository.new('./test/fixtures/items_fixture.csv')
 
-  def test_if_it_finds_
+    result = ir.find_all_by_price_in_range(13..13.50)
+    assert_instance_of Array, result
+  end
+
+  def test_find_all_by_merchant_id
+    ir = ItemRepository.new('./test/fixtures/items_fixture.csv')
+    result = ir.find_all_by_merchant_id(12334185)
+    assert "Glitter scrabble frames", result.first.name
+    assert_instance_of Array, result
+    assert_equal 3, result.count
+  end
 
 end

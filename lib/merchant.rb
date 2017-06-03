@@ -8,6 +8,9 @@ class Merchant
     @updated_at    = attributes[:updated_at]#Time.parse?
   end
 
+  def items
+    
+  end
   def find_all_by_merchant_id(id)
   end
 

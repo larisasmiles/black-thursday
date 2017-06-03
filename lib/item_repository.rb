@@ -40,16 +40,17 @@ class ItemRepository
       end
     end
 
-    # def find_all_by_price_in_range(range)
-    #   @all.find_all do |item|
-    #     (range).include?(item.unit_price)
-    #     binding.pry
-    #   end
-    # end
+    def find_all_by_price_in_range(range)
+      @all.find_all do |item|
+        (range).include?(item.unit_price)
+      end
+    end
 
 
-    def find_all_by_merchant_id
-      # returns either [] or instances of Item where the supplied merchant ID matches that supplied
+    def find_all_by_merchant_id(id)
+      @all.find_all do |item|
+        item.merchant_id
+      end
     end
 
 end
