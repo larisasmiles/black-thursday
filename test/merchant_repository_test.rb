@@ -13,12 +13,8 @@ class MerchantRepositoryTest < Minitest::Test
     mr = MerchantRepository.new('./test/fixtures/merchants_fixture.csv')
 
     assert_equal 3, mr.all.count
-    # binding.pry
     assert_instance_of Merchant, mr.all[0]
-    # binding.pry
-    # assert_equal "Shopin1901", mr.all[1]
-    # assert_equal "Candisart",
-    # assert_equal "MiniatureBikez",
+    assert_instance_of Array, mr.all 
   end
 
   def test_if_it_finds_merchant_by_id

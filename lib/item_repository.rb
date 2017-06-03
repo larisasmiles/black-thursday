@@ -19,7 +19,7 @@ class ItemRepository
     def find_by_id(id)
       @all.select do |item|
         item.id == id
-      end.first
+        end.first
     end
 
     def find_by_name(item)

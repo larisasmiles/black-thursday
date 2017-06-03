@@ -1,34 +1,26 @@
 require 'csv'
-require './lib/item'
+require './lib/merchant_repository'
+require './lib/item_repository'
 require "pry"
 class SalesEngine
-  attr_reader :merchants
+  attr_reader :merchants, :items, :invoices
 
   def initialize(data)
     @merchants = MerchantRepository.new(data[:merchants])
+    @items     = ItemRepository.new(data[:items])
+    @invoices = InvoiceRepository.new(data[:invoices])
 
-
-    # called an instance method
-  #   @items  => "./data/items.csv"
-  #   @merchants => "./data/merchants.csv"
-  # @items = 2   (need attr_reader)
-  # @merchants = merchant_repo
   end
 
-  def self.from_csv(csvs) #called a Class Method
-    # create an instance of Sales Engine
-     self.new(csvs)
-    #  * initialize(csvs)
-    # pass instance csv file paths
-    # its goes and does something
-    # return that instance of Sales Engine
+  def self.from_csv(data)
+     self.new(data)
   end
 
-  def load_csv(path)
-    results = CSV.open(path, headers:true, header_converters: :symbol)
-    results.each do |row|
-      Item.new(row)
-      p "just created #{row}[:id]"
-    end
+  def find_items_by_merchant_id(id)
+    item.find_all_items_by_merchant_id(id)
+  end
+
+  def find_merchant_by_item_id(id)
+    merchants.find_by_id(id)
   end
 end

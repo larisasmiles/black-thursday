@@ -4,19 +4,8 @@ class Merchant
   def initialize(attributes)
     @id            = attributes[:id].to_i
     @name          = attributes[:name]
-    @created_at    = attributes[:created_at]#Time.parse?
-    @updated_at    = attributes[:updated_at]#Time.parse?
+    @created_at    = attributes[:created_at]
+    @updated_at    = attributes[:updated_at]
   end
-
-  def items
-    
-  end
-  def find_all_by_merchant_id(id)
-  end
-
-  def invoices
-    find_all_by_merchant_id(id)
-  end
-
 
 end

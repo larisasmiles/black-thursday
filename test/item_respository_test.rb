@@ -1,6 +1,6 @@
 require_relative 'test_helper'
 require './lib/item_repository'
-require 'pry'
+
 class ItemRepositoryTest < Minitest::Test
 
   def test_if_it_exists
@@ -28,7 +28,6 @@ class ItemRepositoryTest < Minitest::Test
     ir = ItemRepository.new('./test/fixtures/items_fixture.csv')
 
     assert_equal [], ir.find_all_with_decription("You&#39;ve got a total socialmedia iconset! Almost every social icon on the planet earth. zynga")
-
   end
 
   def test_if_finds_all_by_price
@@ -37,7 +36,6 @@ class ItemRepositoryTest < Minitest::Test
     result = ir.find_all_by_price(12.00)
     assert_instance_of Array, result
     assert_equal "510+ RealPush Icon Set", result.first.name
-
   end
 
   def test_if_can_find_a_price_range
