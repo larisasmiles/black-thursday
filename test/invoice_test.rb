@@ -12,7 +12,7 @@ class InvoiceTest < Minitest::Test
       :status      => "pending",
       :created_at  => Time.now,
       :updated_at  => Time.now
-      })
+      }, "repo_place_holder")
   end
 
   def test_if_it_exists
