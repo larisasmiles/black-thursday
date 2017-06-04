@@ -1,9 +1,10 @@
 require_relative 'sales_engine'
+require 'pry'
 
 class SalesAnalyst
   attr_reader :se
 
-  def initialize(se=nil)
+  def initialize(se)
     @se = se
   end
 

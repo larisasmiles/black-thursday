@@ -12,4 +12,7 @@ class Invoice
     @repo        = repo
   end
 
+  def merchant
+    id.pass_to_se(merchant_id)
+  end
 end

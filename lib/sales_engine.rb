@@ -1,8 +1,7 @@
 require 'csv'
-require './lib/merchant_repository'
-require './lib/item_repository'
-require './lib/invoice_repository'
-require 'pry'
+require_relative 'merchant_repository'
+require_relative 'item_repository'
+require_relative 'invoice_repository'
 
 class SalesEngine
   attr_reader :merchants, :items, :invoices
@@ -14,13 +13,14 @@ class SalesEngine
     if data[:items] != nil
       @items         = ItemRepository.new(data[:items], self)
     end
+      @sales_analyst = SalesAnalyst.new(self)
     if data[:invoices] != nil
       @invoices         = InvoiceRepository.new(data[:invoices], self)
     end
   end
 
   def self.from_csv(data)
-    SalesEngine.new(data)
+     SalesEngine.new(data)
   end
 
   def find_items_by_merchant_id(id)
