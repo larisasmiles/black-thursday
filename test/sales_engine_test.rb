@@ -5,9 +5,7 @@ require "pry"
 class SalesEngineTest < Minitest::Test
 
   def test_it_exists
-    # binding.pry
-    se = SalesEngine.new("./data/items.csv", self)
-    se.load_csv("./data/items.csv")
+    se = SalesEngine.from_csv({:items => "./data/items.csv", :merchants => "./data/merchants.csv", :invoices => "./data/invoices.csv"})
 
     assert_instance_of SalesEngine, se
   end

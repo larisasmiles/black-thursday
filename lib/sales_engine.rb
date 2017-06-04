@@ -8,15 +8,18 @@ class SalesEngine
   attr_reader :merchants, :items, :invoices
 
   def initialize(data)
-    @merchants = MerchantRepository.new(data[:merchants], self)
-    @items     = ItemRepository.new(data[:items], self)
+    if data[:merchants] != nil
+      @merchants         = MerchantRepository.new(data[:merchants], self)
+    end
+    if data[:items] != nil
+      @items         = ItemRepository.new(data[:items], self)
+    end
     if data[:invoices] != nil
-      @invoices = InvoiceRepository.new(data[:invoices], self)
+      @invoices         = InvoiceRepository.new(data[:invoices], self)
     end
   end
 
   def self.from_csv(data)
-
     SalesEngine.new(data)
   end
 
