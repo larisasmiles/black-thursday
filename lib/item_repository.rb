@@ -3,16 +3,17 @@ require './lib/item'
 
 
 class ItemRepository
-    attr_reader :all
+    attr_reader :all, :se
 
-    def initialize(path)
-      @all = load_csv(path)
+    def initialize(path, se)
+      @all = from_csv(path)
+      @se  = se
     end
 
-    def load_csv(path)
+    def from_csv(path)
       results = CSV.open(path, headers:true, header_converters: :symbol)
       results.map do |row|
-        Item.new(row)
+        Item.new(row, self)
       end
     end
 

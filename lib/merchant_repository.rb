@@ -2,16 +2,17 @@ require 'csv'
 require "pry"
 require './lib/merchant'
 class MerchantRepository
-    attr_reader :all
+    attr_reader :all, :se
 
-  def initialize(path)
-    @all  = load_csv(path)
+  def initialize(path, se)
+    @all  = from_csv(path)
+    @se   = se
   end
 
-  def load_csv(path)
+  def from_csv(path)
     results = CSV.open(path, headers:true, header_converters: :symbol)
     results.map do |row|
-      Merchant.new(row)
+      Merchant.new(row, self)
     end
   end
 

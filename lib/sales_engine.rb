@@ -1,19 +1,23 @@
 require 'csv'
 require './lib/merchant_repository'
 require './lib/item_repository'
-require "pry"
+require './lib/invoice_repository'
+require 'pry'
+
 class SalesEngine
   attr_reader :merchants, :items, :invoices
 
   def initialize(data)
-    @merchants = MerchantRepository.new(data[:merchants])
-    @items     = ItemRepository.new(data[:items])
-    @invoices = InvoiceRepository.new(data[:invoices])
-
+    @merchants = MerchantRepository.new(data[:merchants], self)
+    @items     = ItemRepository.new(data[:items], self)
+    if data[:invoices] != nil
+      @invoices = InvoiceRepository.new(data[:invoices], self)
+    end
   end
 
   def self.from_csv(data)
-     self.new(data)
+
+    SalesEngine.new(data)
   end
 
   def find_items_by_merchant_id(id)

@@ -13,7 +13,7 @@ class ItemTest < Minitest::Test
       :created_at  => Time.now,
       :updated_at  => Time.now,
       :merchant_id => 123456
-      })
+      }, self)
   end
 
 
