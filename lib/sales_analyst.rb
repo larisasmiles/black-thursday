@@ -9,18 +9,25 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant
-    2.88
+    (se.items.all.count.to_f / se.merchants.all.count.to_f).round(2)
+  end
+
+  def merchant_items_by_count
+   array = []
+   se.merchants.all.map {|merchant| array << merchant.items.count}
+   array
   end
 
   def average_items_per_merchant_standard_deviation
-    3.26
+   ipm_standard_deviation
   end
 
-  def calculate_standard_deviation
-    set = [3,4,5]
-
-    std_dev = sqrt( ( (3-4)^2+(4-4)^2+(5-4)^2 ) / 2 )
+  def ipm_standard_deviation
+   total = 0
+   merchant_items_by_count.map {|num| total += ((num.to_f - average_items_per_merchant.to_f) ** 2)}
+   Math.sqrt(total / (se.merchants.all.count.to_f - 1.00)).round(2)
   end
+
 
   def merchants_with_high_item_count
     # => [merchant, merchant, merchant]
