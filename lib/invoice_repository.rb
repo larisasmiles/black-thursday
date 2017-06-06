@@ -1,5 +1,5 @@
 require 'csv'
-require_relative 'invoice'
+require_relative '../lib/invoice'
 
 class InvoiceRepository
   attr_reader :all, :se
@@ -7,6 +7,10 @@ class InvoiceRepository
   def initialize(path, se)
     @all = from_csv(path)
     @se  = se
+  end
+  
+  def inspect
+   "#<#{self.class} #{@merchants.size} rows>"
   end
 
   def from_csv(path)
@@ -21,14 +25,4 @@ class InvoiceRepository
       invoice.id == id
       end.first
   end
-
-  # def find_by_name(invoice)
-  #   @all.find do |customer_id|
-  #     customer_id.customer_id == customer_id
-  #   end
-  # end
-
-
-
-
 end

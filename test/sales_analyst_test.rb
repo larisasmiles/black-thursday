@@ -28,6 +28,15 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 2.99, result
   end
 
+  def test_merchants_with_high_item_count
+    result = sa.merchants_with_high_item_count
+    
+  end
+
+  def test_the_average_item_price
+    result = sa.average_item_price_for_merchant
+  end
+
 
 
 end

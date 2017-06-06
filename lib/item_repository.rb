@@ -1,5 +1,5 @@
 require 'csv'
-require_relative 'item'
+require_relative '../lib/item'
 
 
 class ItemRepository
@@ -9,6 +9,10 @@ class ItemRepository
       @all = from_csv(path)
       @se  = se
     end
+
+    # def inspect
+    #  "#<#{self.class} #{@merchants.size} rows>"
+    # end
 
     def from_csv(path)
       results = CSV.open(path, headers:true, header_converters: :symbol)
@@ -29,10 +33,15 @@ class ItemRepository
       end
     end
 
-    def find_all_with_decription(description)
-      @all.select do |description|
-        description.description == description
+    def find_all_with_description(segment)
+      binding.pry
+
+      found_item = @all.select do |item|
+        item.description.include?(segment)
       end
+      binding.pry
+
+      found_item
     end
 
     def find_all_by_price(unit_price)
