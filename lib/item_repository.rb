@@ -8,11 +8,12 @@ class ItemRepository
     def initialize(path, se)
       @all = from_csv(path)
       @se  = se
+
     end
 
-    # def inspect
-    #  "#<#{self.class} #{@merchants.size} rows>"
-    # end
+    def inspect
+     "#<#{self.class} #{@merchants.size} rows>"
+    end
 
     def from_csv(path)
       results = CSV.open(path, headers:true, header_converters: :symbol)
@@ -22,26 +23,23 @@ class ItemRepository
     end
 
     def find_by_id(id)
-      @all.select do |item|
+      items = @all.select do |item|
         item.id == id
-        end.first
+      end
+      return items[0]
     end
 
     def find_by_name(item)
       @all.find do |name|
-        name.name == item
+        name.name.upcase == item.upcase
       end
     end
 
     def find_all_with_description(segment)
-      binding.pry
-
-      found_item = @all.select do |item|
-        item.description.include?(segment)
+      found_items = @all.select do |item|
+        item.description.downcase.include?(segment.downcase)
       end
-      binding.pry
-
-      found_item
+      return found_items
     end
 
     def find_all_by_price(unit_price)
@@ -59,8 +57,7 @@ class ItemRepository
 
     def find_all_by_merchant_id(id)
       @all.find_all do |item|
-        item.merchant_id
+        item.merchant_id == id
       end
     end
-
 end

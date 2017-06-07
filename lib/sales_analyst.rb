@@ -13,8 +13,9 @@ class SalesAnalyst
   end
 
   def merchant_items_by_count
+
    array = []
-   se.merchants.all.map {|merchant| array << merchant.items.count}
+   se.merchants.all.each {|merchant| array << merchant.items.count}
    array
   end
 
@@ -24,13 +25,18 @@ class SalesAnalyst
 
   def ipm_standard_deviation
    total = 0
-   merchant_items_by_count.map {|num| total += ((num.to_f - average_items_per_merchant.to_f) ** 2)}
-   Math.sqrt(total / (se.merchants.all.count.to_f - 1.00)).round(2)
+   difference_squared = merchant_items_by_count.map {|num| (num.to_f - average_items_per_merchant.to_f) ** 2}
+   sum_of_squares = difference_squared.reduce(:+)
+   Math.sqrt(sum_of_squares.to_f / (se.merchants.all.count - 1)).round(2)
   end
 
 
   def merchants_with_high_item_count
-    # => [merchant, merchant, merchant]
+    above_average = average_items_per_merchant + average_items_per_merchant_standard_deviation
+    binding.pry
+    se.merchants.all.find_all do |merchant|
+      merchant.items.count > above_average
+    end
   end
 
   def average_item_price_for_merchant(id)

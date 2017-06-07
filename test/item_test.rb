@@ -9,7 +9,7 @@ class ItemTest < Minitest::Test
       :id          => 0,
       :name        => "Pencil",
       :description => "You can use it to write things",
-      :unit_price  => BigDecimal.new(10.99,4),
+      :unit_price  => 100,
       :created_at  => Time.now,
       :updated_at  => Time.now,
       :merchant_id => 123456
@@ -34,7 +34,7 @@ class ItemTest < Minitest::Test
   end
 
   def test_if_it_returns_unit_price
-    assert_instance_of BigDecimal, @i.unit_price
+    assert_equal 0.1e1, @i.unit_price
   end
 
   def test_if_it_returns_merchant_id
@@ -43,11 +43,14 @@ class ItemTest < Minitest::Test
 
   def test_if_it_returns_created_at
     time = Time.now
-    assert time, @i.created_at
+    refute_equal time, @i.created_at
   end
 
   def test_if_it_returns_updated_at
     time = Time.now
-    assert time, @i.updated_at
+    refute_equal time, @i.updated_at
   end
+
+
+
 end
