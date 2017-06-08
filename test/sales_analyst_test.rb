@@ -43,38 +43,50 @@ class SalesAnalystTest < Minitest::Test
 
     assert_instance_of Array, sa_1.merchants_with_high_item_count
   end
-
-  def test_for_sum_of_item_price
-    se_1 = SalesEngine.from_csv({
-    :items     => "./test/fixtures/items_sd_fixture.csv",
-    :merchants => "./test/fixtures/merchants_sd_fixture.csv"
-    })
-    sa_1 = SalesAnalyst.new(se_1)
-    merchant = 12334105
-    assert_equal 1, sa_1.sum_of_item_prices(merchant)
-  end
-
-  # def average_item_price_for_merchant
+  #
+  # def test_for_sum_of_item_price
   #   se_1 = SalesEngine.from_csv({
-  #   :items     => "./test/fixtures/items_sd_fixture.csv",
-  #   :merchants => "./test/fixtures/merchants_sd_fixture.csv"
+  #   :items     => "./data/items.csv",
+  #   :merchants => "./data/merchants.csv"
   #   })
   #   sa_1 = SalesAnalyst.new(se_1)
-  #
-  #   merchant = sa_1.se.all.merchants.find_by_id(12334105)
+  #   merchant = 12334105
   #   assert_equal 1, sa_1.sum_of_item_prices(merchant)
   # end
 
-  def average_item_price_for_merchant
+  def test_average_item_price_for_merchant
     se_1 = SalesEngine.from_csv({
-    :items     => "./test/fixtures/items_sd_fixture.csv",
-    :merchants => "./test/fixtures/merchants_sd_fixture.csv"
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv"
     })
     sa_1 = SalesAnalyst.new(se_1)
 
-    merchant = sa_1.se.all.merchants.find_by_id(12334105)
-    assert_equal 1, sa_1.sum_of_item_prices(merchant)
+
+    assert_instance_of BigDecimal, sa_1.average_item_price_for_merchant(12334113)
+    assert_equal 16.66, sa_1.average_item_price_for_merchant(12334105)
   end
+  #
+  # def test_if_sum_of_items
+  #   se_1 = SalesEngine.from_csv({
+  #   :items     => "./test/fixtures/items_fixture.csv",
+  #   :merchants => "./test/fixtures/merchants_fixture.csv"
+  #   })
+  #   sa_1 = SalesAnalyst.new(se_1)
+  #   assert_equal 3, sa_1.sum_of_item_prices(12334113)
+  # end
+
+  def average_average_item_price_for_merchant
+    se_1 = SalesEngine.from_csv({
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv"
+    })
+    sa_1 = SalesAnalyst.new(se_1)
+
+    assert_instance_of BigDecimal, sa_1.average_average_price_per_merchant
+    assert_equal 350.29, sa_1.average_average_item_price_for_merchant
+  end
+
+  def golden_items returns items that are two standard deviations above the average price
 
 
 

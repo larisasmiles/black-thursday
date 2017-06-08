@@ -38,18 +38,27 @@ class SalesAnalyst
     end
   end
 
-  def sum_of_item_prices(merchant)
-    binding.pry
-    se.merchants.all.map
+  # def sum_of_item_prices(merchant)
+  #   make_inventory(merchant).reduce(:+)
+  # end
 
-
-
-  end
   def average_item_price_for_merchant(id)
-    merchant = se.merchants.all.find_by_id(id)
-    sum = sum_of_item_prices(merchant)
-    number_of_items= merchant.items.count
-    average(sum, number_of_items)
+    items = se.collected_items(id)
+    sum = 0
+    items.each do |item|
+      sum += item.unit_price
+    end
+    var = sum/(items.length)
+    var.round(2)
+  end
+
+  def average_average_price_per_merchant
+    all_merch_ave = []
+    se.merchants.all.each do |merchant|
+      all_merch_ave << average_item_price_for_merchant(merchant.id)
+    end
+    total_averages = all_merch_ave.reduce(:+) / all_merch_ave.count
+    total_averages.round(2)
   end
 
   def golden_items
