@@ -33,14 +33,23 @@ class SalesAnalyst
 
   def merchants_with_high_item_count
     above_average = average_items_per_merchant + average_items_per_merchant_standard_deviation
-    binding.pry
     se.merchants.all.find_all do |merchant|
       merchant.items.count > above_average
     end
   end
 
+  def sum_of_item_prices(merchant)
+    binding.pry
+    se.merchants.all.map
+
+
+
+  end
   def average_item_price_for_merchant(id)
-    #returns BigDecimal
+    merchant = se.merchants.all.find_by_id(id)
+    sum = sum_of_item_prices(merchant)
+    number_of_items= merchant.items.count
+    average(sum, number_of_items)
   end
 
   def golden_items
