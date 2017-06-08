@@ -75,7 +75,7 @@ class SalesAnalystTest < Minitest::Test
   #   assert_equal 3, sa_1.sum_of_item_prices(12334113)
   # end
 
-  def average_average_item_price_for_merchant
+  def test_average_average_item_price_for_merchant
     se_1 = SalesEngine.from_csv({
     :items     => "./data/items.csv",
     :merchants => "./data/merchants.csv"
@@ -83,20 +83,17 @@ class SalesAnalystTest < Minitest::Test
     sa_1 = SalesAnalyst.new(se_1)
 
     assert_instance_of BigDecimal, sa_1.average_average_price_per_merchant
-    assert_equal 350.29, sa_1.average_average_item_price_for_merchant
+    assert_equal 350.29, sa_1.average_average_price_per_merchant
   end
 
-  def golden_items returns items that are two standard deviations above the average price
+  def test_golden_items_two_standard_deviations_above_average
+    se_1 = SalesEngine.from_csv({
+    :items     => "./data/items.csv",
+    :merchants => "./data/merchants.csv"
+    })
+    sa_1 = SalesAnalyst.new(se_1)
 
-
-
+    assert_equal 4, sa_1.golden_items.length
+  end
 
 end
-
-
-
-
-
-
-  #   result = sa.average_item_price_for_merchant
-  # end
